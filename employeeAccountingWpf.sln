@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "employeeAccountingWpf", "employeeAccountingWpf\employeeAccountingWpf.csproj", "{3202FF43-82E0-4729-A915-602AACD603B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3202FF43-82E0-4729-A915-602AACD603B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3202FF43-82E0-4729-A915-602AACD603B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3202FF43-82E0-4729-A915-602AACD603B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3202FF43-82E0-4729-A915-602AACD603B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCB55614-C27F-4EAE-8C9D-D3BD10187AA2}
+	EndGlobalSection
+EndGlobal
