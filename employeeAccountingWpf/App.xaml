@@ -1,15 +1,26 @@
 ﻿<Application x:Class="employeeAccountingWpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:employeeAccountingWpf"
-             StartupUri="MainWindow.xaml">
+             xmlns:modelviews="clr-namespace:employeeAccountingWpf.ViewModels"
+             xmlns:views="clr-namespace:employeeAccountingWpf.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Application.Resources>
         <ResourceDictionary>
+            <DataTemplate DataType="{x:Type modelviews:SettingsViewModel}">
+                <views:Settings/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type modelviews:EmployeesViewModel}">
+                <views:Employees/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type modelviews:SchedulesViewModel}">
+                <views:Schedules/>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Green" SecondaryColor="Green" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Green.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightGreen.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

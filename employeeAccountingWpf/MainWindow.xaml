@@ -3,20 +3,57 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:employeeAccountingWpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-     TextElement.FontWeight="Regular"
-     TextElement.FontSize="13"
-     TextOptions.TextFormattingMode="Ideal"
-     TextOptions.TextRenderingMode="Auto"
-     Background="{DynamicResource MaterialDesignPaper}"
-     FontFamily="{DynamicResource MaterialDesignFont}">
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ValidationErrorTemplate.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Menu.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <materialDesign:Card Padding="32" Margin="16">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">My First Material Design App</TextBlock>
-        </materialDesign:Card>
+        <ContentControl Content="{Binding CurrentPageViewModel}" Margin="0,80,0,0" />
+        <materialDesign:DrawerHost BorderBrush="{DynamicResource MaterialDesignDivider}" IsLeftDrawerOpen="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}">
+            <materialDesign:ColorZone Mode="PrimaryDark" Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth3" ClipToBounds="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50px" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="300px" />
+                    </Grid.ColumnDefinitions>
+                    <ToggleButton IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" Command="{Binding OpenDrawerCommand}" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" Grid.Column="0"/>
+                    <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" FontSize="20" Text="Меню" Grid.Column="1"/>
+                </Grid>
+            </materialDesign:ColorZone>
+
+            <materialDesign:DrawerHost.Style >
+                <Style TargetType="materialDesign:DrawerHost" BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <Setter Property="OverlayBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </materialDesign:DrawerHost.Style>
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <StackPanel Width="250px" Margin="10px">
+                    <ToggleButton IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" Command="{Binding CloseDrawerCommand}" Style="{DynamicResource MaterialDesignHamburgerToggleButton}"/>
+                    <TextBlock Margin="4" HorizontalAlignment="Center" Text="Меню" />
+                    <Button Content="График" Command="{Binding GoToSchedules}" Style="{DynamicResource MaterialDesignFlatButton}" Width="200px" Height="30"/>
+                    <Button Content="Сотрудники" Command="{Binding GoToEmployees}" Style="{DynamicResource MaterialDesignFlatButton}" Width="200px" Height="30" />
+                    <Button Content="Настройки" Command="{Binding GoToSettings}" Style="{DynamicResource MaterialDesignFlatButton}" Width="200px" Height="30" />
+                </StackPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+        </materialDesign:DrawerHost>
     </Grid>
 </Window>
