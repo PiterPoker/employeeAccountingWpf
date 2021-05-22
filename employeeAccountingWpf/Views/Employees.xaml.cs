@@ -16,13 +16,23 @@ using System.Windows.Shapes;
 namespace employeeAccountingWpf.Views
 {
     /// <summary>
-    /// Interaction logic for Employees.xaml
+    /// Interaction logic for Employee.xaml
     /// </summary>
     public partial class Employees : UserControl
     {
         public Employees()
         {
             InitializeComponent();
+        }
+
+        private void GridViewColumn_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -4,9 +4,268 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:employeeAccountingWpf.Views"
+             xmlns:viewModels="clr-namespace:employeeAccountingWpf.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:domain="clr-namespace:employeeAccountingWpf.Services"
+             d:DataContext="{d:DesignInstance viewModels:EmployeesViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock>Employees</TextBlock>            
-    </Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ValidationErrorTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <materialDesign:DialogHost  IsOpen="{Binding IsCheck}" DialogTheme="Inherit">
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel
+      Margin="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Новый работник" />
+                    <TextBox Grid.Row="1" materialDesign:HintAssist.Hint="Фамилия" materialDesign:HintAssist.HelperText="Введите фамилию" Margin="15" HorizontalAlignment="Stretch" >
+                        <TextBox.Text>
+                            <Binding Path="Employee.LastName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Grid.Row="2" materialDesign:HintAssist.Hint="Имя" materialDesign:HintAssist.HelperText="Введите имя" Margin="15" HorizontalAlignment="Stretch" >
+                        <TextBox.Text>
+                            <Binding Path="Employee.FirstName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Grid.Row="3" materialDesign:HintAssist.Hint="Отчество" materialDesign:HintAssist.HelperText="Введите отчество" Margin="15" HorizontalAlignment="Stretch" >
+                        <TextBox.Text>
+                            <Binding Path="Employee.MiddleName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                    
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Grid>
+                <StackPanel
+        Orientation="Horizontal"
+        HorizontalAlignment="Right">
+                    <Button
+          Style="{StaticResource MaterialDesignFlatButton}"
+          IsDefault="True"
+          Margin="0 8 8 0"
+          Content="Сохранить" 
+          Command="{Binding AddCardCommand}" CommandParameter="{Binding Employee}">
+                    </Button>
+                    <Button
+          Style="{StaticResource MaterialDesignFlatButton}"
+          IsCancel="True"
+          Margin="0 8 8 0"
+          Content="Отмена"
+          Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                        <Button.CommandParameter>
+                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                False
+                            </system:Boolean>
+                        </Button.CommandParameter>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:DialogHost.DialogContent>
+        <Border
+    BorderThickness="1"
+    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+    MinHeight="256"
+    ClipToBounds="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition
+          Height="*" />
+                    <RowDefinition
+          Height="Auto" />
+                </Grid.RowDefinitions>
+                <WrapPanel Grid.Row="0"  Orientation="Horizontal" HorizontalAlignment="Center">
+                    <ListView ItemsSource="{Binding Items1}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SelectedItem="{Binding SelectEmployee}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel ItemHeight="300" ItemWidth="300" Orientation="Horizontal">
+                                <materialDesign:Flipper IsFlipped="{Binding IsCheckFlipped}"
+                      Style="{StaticResource MaterialDesignCardFlipper}"
+                      materialDesign:ShadowAssist.ShadowDepth="Depth0">
+                                    <materialDesign:Flipper.FrontContent>
+                                        <Grid
+                          Height="256"
+                          Width="200">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition
+                              Height="160" />
+                                                <RowDefinition
+                              Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <materialDesign:ColorZone
+                            Mode="PrimaryLight"
+                            VerticalAlignment="Stretch">
+                                                <materialDesign:PackIcon
+                              Kind="AccountCircle"
+                              Height="128"
+                              Width="128"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center" />
+                                            </materialDesign:ColorZone>
+                                            <StackPanel
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Margin="1" />
+                                                    <TextBlock Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Margin="1"/>
+                                                    <TextBlock Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" Margin="1"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+                                    </materialDesign:Flipper.FrontContent>
+                                    <materialDesign:Flipper.BackContent>
+                                        <Grid
+                          Height="256"
+                          Width="200">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition
+                              Height="Auto" />
+                                                <RowDefinition
+                              Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <materialDesign:ColorZone
+                            Mode="SecondaryMid"
+                            Padding="6">
+                                                <StackPanel
+                              Orientation="Horizontal">
+                                                    <Button
+                                Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                HorizontalAlignment="Left">
+                                                        <materialDesign:PackIcon
+                                  Kind="ArrowLeft"
+                                  HorizontalAlignment="Right" />
+                                                    </Button>
+                                                    <TextBlock
+                                Margin="8 0 0 0"
+                                VerticalAlignment="Center"
+                                Text="Редактирование" />
+                                                </StackPanel>
+                                            </materialDesign:ColorZone>
+                                            <Grid
+                            Grid.Row="1"
+                            Margin="0 6 0 0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Width="172">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                    <RowDefinition />
+                                                    <RowDefinition />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <TextBox
+                              materialDesign:HintAssist.Hint="Фамилия"
+                              materialDesign:HintAssist.IsFloating="True"
+                              Margin="0 12 0 0" >
+                                                    <TextBox.Text>
+                                                        <Binding Path="LastName" UpdateSourceTrigger="PropertyChanged">
+                                                            <Binding.ValidationRules>
+                                                                <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+
+                                                            </Binding.ValidationRules>
+                                                        </Binding>
+                                                    </TextBox.Text>
+                                                </TextBox>
+                                                <TextBox 
+                              Grid.Row="1"
+                              materialDesign:HintAssist.Hint="Имя"
+                              materialDesign:HintAssist.IsFloating="True"
+                              Margin="0 12 0 0">
+                                                    <TextBox.Text>
+                                                        <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
+                                                            <Binding.ValidationRules>
+                                                                <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+
+                                                            </Binding.ValidationRules>
+                                                        </Binding>
+                                                    </TextBox.Text>
+                                                </TextBox>
+                                                <TextBox 
+                              Grid.Row="2"
+                              materialDesign:HintAssist.Hint="Отчество"
+                              materialDesign:HintAssist.IsFloating="True"
+                              Margin="0 12 0 0">
+                                                    <TextBox.Text>
+                                                        <Binding Path="MiddleName" UpdateSourceTrigger="PropertyChanged">
+                                                            <Binding.ValidationRules>
+                                                                <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+
+                                                            </Binding.ValidationRules>
+                                                        </Binding>
+                                                    </TextBox.Text>
+                                                </TextBox>
+                                            </Grid>
+                                        </Grid>
+                                    </materialDesign:Flipper.BackContent>
+                                </materialDesign:Flipper>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </WrapPanel>
+                <materialDesign:ColorZone
+        Mode="PrimaryMid"
+        Grid.Row="1"
+        Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                    <TextBlock
+          Margin="16"
+          Text="Карточки рабочих" Foreground="#DDFFFFFF"  />
+                </materialDesign:ColorZone>
+                <Button
+        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+        Command="{Binding SaveCardCommand}" CommandParameter="{Binding SelectEmployee}"
+        VerticalAlignment="Bottom"
+        HorizontalAlignment="Right"
+        Grid.Row="0"
+        Margin="0 0 130 -20"
+        Content="{materialDesign:PackIcon Kind=AccountEditOutline, Size=22}" />
+                <Button
+        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+        VerticalAlignment="Bottom"
+        HorizontalAlignment="Right"
+        Grid.Row="0"
+        Margin="0 0 80 -20"
+        Content="{materialDesign:PackIcon Kind=Plus, Size=22}" />
+                <Button
+        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+        Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectEmployee}"
+        VerticalAlignment="Bottom"
+        HorizontalAlignment="Right"
+        Grid.Row="0"
+        Margin="0 0 28 -20"
+        Content="{materialDesign:PackIcon Kind=Minus, Size=22}" />
+            </Grid>
+        </Border>
+    </materialDesign:DialogHost>
 </UserControl>
