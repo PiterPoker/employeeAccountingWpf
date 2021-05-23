@@ -179,5 +179,55 @@ namespace employeeAccountingWpf.ViewModels
                         }
             };
         }
+
+        public static ObservableCollection<Mark> CreateDataMarks()
+        {
+            return new ObservableCollection<Mark>
+            {
+                new Mark
+                {
+                    Id = 0,
+                    Name = "Первая смена",
+                    MarkKey = "1",
+                    NumberOfHours = 8
+                },new Mark
+                {
+                    Id = 1,
+                    Name = "Второая смена",
+                    MarkKey = "2",
+                    NumberOfHours = 8
+                },new Mark
+                {
+                    Id = 2,
+                    Name = "Третья смена",
+                    MarkKey = "3",
+                    NumberOfHours = 8
+                },new Mark
+                {
+                    Id = 3,
+                    Name = "Выходной",
+                    MarkKey = "ВХ",
+                    NumberOfHours = 0
+                },new Mark
+                {
+                    Id = 4,
+                    Name = "Праздник",
+                    MarkKey = "П",
+                    NumberOfHours = 0
+                },new Mark
+                {
+                    Id = 5,
+                    Name = "Больничный",
+                    MarkKey = "Б",
+                    NumberOfHours = 0
+                },new Mark
+                {
+                    Id = 6,
+                    Name = "Уволен",
+                    MarkKey = "У",
+                    NumberOfHours = 0
+                }
+            };
+        }
     }
 }
