@@ -40,9 +40,9 @@ namespace employeeAccountingWpf.ViewModels
                             else if (employee.IsCheckFlipped == true)
                             {
                                 var _employeeDel = Items1.Where(p => p.Id == employee.Id).FirstOrDefault();
-                                _employee.FirstName = employee.FirstName;
-                                _employee.LastName = employee.LastName;
-                                _employee.MiddleName = employee.MiddleName;
+                                _employeeDel.FirstName = employee.FirstName;
+                                _employeeDel.LastName = employee.LastName;
+                                _employeeDel.MiddleName = employee.MiddleName;
                                 employee.IsCheckFlipped = false;
                             }
                         }
