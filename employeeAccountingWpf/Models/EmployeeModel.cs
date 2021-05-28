@@ -3,13 +3,14 @@ using System.Collections.ObjectModel;
 
 namespace employeeAccountingWpf.Models
 {
-    public class Employee : BaseViewModel
+    public class EmployeeModel : BaseViewModel
     {
         private int id;
         private string firstName;
         private string middleName;
         private string lastName;
         private bool _isCheckFlipped;
+        private bool _isCheckDelete;
 
         public int Id { 
             get { 
@@ -57,6 +58,16 @@ namespace employeeAccountingWpf.Models
                 OnPropertyChanged("IsCheckFlipped");
             }
         }
-        public ObservableCollection<WorkingDay> WorkingDays { get; set; }
+
+        public bool IsCheckDelete
+        {
+            get { return _isCheckDelete; }
+            set
+            {
+                _isCheckDelete = value;
+                OnPropertyChanged("IsCheckDelete");
+            }
+        }
+        public ObservableCollection<WorkingDayModel> WorkingDays { get; set; }
     }
 }

@@ -22,13 +22,13 @@
         <materialDesign:DialogHost IsOpen="{Binding IsOpenDialog}">
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
-                    <TextBlock Text="Добавить новый тег"/>
+                    <!--<TextBlock Text="{Binding TitleDialog}"/>
 
                     <TextBox
                                 Margin="5"
                                 materialDesign:HintAssist.Hint="Название"
                                 HorizontalAlignment="Stretch" Text="{Binding Mark.Name, UpdateSourceTrigger=PropertyChanged}"/> 
-                    <TextBox
+                    <TextBox Visibility="{Binding IsViseble}"
                                 Margin="5"
                                 materialDesign:HintAssist.Hint="Сокращение"
                                 HorizontalAlignment="Stretch"
@@ -37,6 +37,7 @@
                                 Margin="5"
                                 materialDesign:HintAssist.Hint="Рабочие часы"
                                 HorizontalAlignment="Stretch"
+                        
                         Text="{Binding Mark.NumberOfHours, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <StackPanel
@@ -60,13 +61,14 @@
                                 <system:Boolean>False</system:Boolean>
                             </Button.CommandParameter>
                         </Button>
-                    </StackPanel>
+                    </StackPanel>-->
                 </StackPanel>
             </materialDesign:DialogHost.DialogContent>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"></RowDefinition>
                     <RowDefinition Height="60"></RowDefinition>
+                    <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -243,6 +245,7 @@
                     </materialDesign:PackIcon>
                 </Button>
                 <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
+                    <TextBlock Text="Статусы рабочего дня:"/>
                     <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Path=Marks}" SelectedItem="{Binding SelectMark}" Margin="5">
                         <ListView.View>
                             <GridView>
@@ -254,12 +257,28 @@
                     </ListView>
 
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="Добавть" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Width="100" Foreground="AliceBlue" Margin="5"/>
+                        <Button Content="Добавть" Command="{Binding OpenStatusDayCardCommand}" Width="100" Foreground="AliceBlue" Margin="5"/>
                         <Button Content="Удалить" Width="100" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectMark}" Foreground="White" Margin="5"/>
-                        <Button Content="Изменить" Command="{Binding EditMarkCommand}" CommandParameter="{Binding SelectMark}" Width="100" Foreground="White" Margin="5"/>
+                        <!--<Button Content="Изменить" Command="{Binding EditMarkCommand}" CommandParameter="{Binding SelectMark}" Width="100" Foreground="White" Margin="5"/>-->
                     </StackPanel>
                 </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Vertical">
+                    <TextBlock Text="Статусы сотрудника:"/>
+                    <ListView Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Path=StatusEmployeeModels}" SelectedItem="{Binding SelectStatusEmployeeModel}" Margin="5">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameStatusEmployee, UpdateSourceTrigger=PropertyChanged}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=AbbreviationStatusEmployee, UpdateSourceTrigger=PropertyChanged}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
 
+                    <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Добавть" Command="{Binding OpenStatusEmployeeCardCommand}" CommandParameter="{Binding SelectStatusEmployeeModel}" Width="100"  Foreground="AliceBlue" Margin="5"/>
+                        <Button Content="Удалить" Width="100" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectStatusEmployeeModel}" Foreground="White" Margin="5"/>
+                        <!--<Button Content="Изменить" Command="{Binding OpenStatusEmployeeCardCommand}"  CommandParameter="{Binding SelectStatusEmployeeModel}" Width="100" Foreground="White" Margin="5"/>-->
+                    </StackPanel>
+                </StackPanel>
             </Grid>
         </materialDesign:DialogHost>
     </Grid>

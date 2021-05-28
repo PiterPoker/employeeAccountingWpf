@@ -3,10 +3,10 @@ using System;
 
 namespace employeeAccountingWpf.Models
 {
-    public class WorkingDay : BaseViewModel
+    public class WorkingDayModel : BaseViewModel
     {
         private int id;
-        private Employee employeesId;
+        private EmployeeModel employeesId;
         private int operatingId;
         private DateTime startDateTime;
         private DateTime endDateTime;
@@ -22,7 +22,7 @@ namespace employeeAccountingWpf.Models
             } 
         }
 
-        public Employee EmployeesId {
+        public EmployeeModel EmployeesId {
             get {
                 return employeesId;
             }

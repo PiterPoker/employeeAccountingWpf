@@ -13,26 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace employeeAccountingWpf.Views
+namespace employeeAccountingWpf.Views.DialogWindow
 {
     /// <summary>
-    /// Interaction logic for EmployeeModel.xaml
+    /// Interaction logic for StatusEmployeeCard.xaml
     /// </summary>
-    public partial class Employees : UserControl
+    public partial class StatusEmployeeCard : UserControl
     {
-        public Employees()
+        public StatusEmployeeCard()
         {
             InitializeComponent();
-        }
-
-        private void GridViewColumn_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

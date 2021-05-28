@@ -5,22 +5,23 @@ using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace employeeAccountingWpf.ViewModels
 {
-    internal class EmployeesViewModel : BaseViewModel, IPageViewModel
+    public class EmployeesViewModel : BaseViewModel, IPageViewModel
     {
 
         public EmployeesViewModel()
         {
             Items1 = TestDataViewModel.CreateDataEmploees();
             Items2 = TestDataViewModel.CreateDataWorkingDays();
-            Employee = new Employee();
+            EmployeeModel = new EmployeeModel();
         }
 
-        public ObservableCollection<Employee> Items1 { get; set; }
-        public ObservableCollection<WorkingDay> Items2 { get; set; }
+        public ObservableCollection<EmployeeModel> Items1 { get; set; }
+        public ObservableCollection<WorkingDayModel> Items2 { get; set; }
 
         private RelayCommand saveCardCommand;
         public RelayCommand SaveCardCommand
@@ -30,7 +31,7 @@ namespace employeeAccountingWpf.ViewModels
                 return saveCardCommand ??
                     (saveCardCommand = new RelayCommand(obj =>
                     {
-                        Employee employee = obj as Employee;
+                        EmployeeModel employee = obj as EmployeeModel;
                         if(employee != null)
                         {
                             if (employee.IsCheckFlipped == false)
@@ -59,11 +60,11 @@ namespace employeeAccountingWpf.ViewModels
                 return _addCradCommand ??
                   (_addCradCommand = new RelayCommand(obj =>
                   {
-                      Employee _employeesNew = new Employee()
+                      EmployeeModel _employeesNew = new EmployeeModel()
                       {
-                          FirstName = Employee.FirstName,
-                          LastName = Employee.LastName,
-                          MiddleName = Employee.MiddleName
+                          FirstName = EmployeeModel.FirstName,
+                          LastName = EmployeeModel.LastName,
+                          MiddleName = EmployeeModel.MiddleName
                       };
                       Items1.Insert(0, _employeesNew);
                       IsCheck = false;
@@ -79,24 +80,27 @@ namespace employeeAccountingWpf.ViewModels
                 return removeCommand ??
                     (removeCommand = new RelayCommand(obj =>
                     {
-                        Employee _employees = SelectEmployee;
-                        if (_employees != null)
+                        EmployeeModel _employees = SelectEmployee;
+                        if (_employees != null&& _employees.IsCheckDelete==true)
                         {
                             Items1.Remove(_employees);
+                        }else if(_employees.IsCheckDelete == false) 
+                        {
+                            MessageBox.Show("Сотрудник не может быть удален т. к. он работал посдедние 5 лет. Дождитесь срока окончания хранения карточки.");
                         }
                     },
                     (obj) => Items1.Count > 0));
             }
         }
 
-        private Employee _employee { get; set; }
-        public Employee Employee
+        private EmployeeModel _employeeModel { get; set; }
+        public EmployeeModel EmployeeModel
         {
-            get { return _employee; }
+            get { return _employeeModel; }
             set
             {
-                _employee = value;
-                OnPropertyChanged("Employee");
+                _employeeModel = value;
+                OnPropertyChanged("EmployeeModel");
             }
         }
 
@@ -111,8 +115,8 @@ namespace employeeAccountingWpf.ViewModels
             }
         }
 
-        private Employee _selectEmployee { get; set; }
-        public Employee SelectEmployee
+        private EmployeeModel _selectEmployee { get; set; }
+        public EmployeeModel SelectEmployee
         {
             get { return _selectEmployee; }
             set

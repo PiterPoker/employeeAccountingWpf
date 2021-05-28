@@ -68,7 +68,7 @@ namespace employeeAccountingWpf.ViewModels
             CurrentPageViewModel = PageViewModels[0];
 
             Mediator.Subscribe("Schedules", Schedules);
-            Mediator.Subscribe("Employee", Employees);
+            Mediator.Subscribe("EmployeeModel", Employees);
             Mediator.Subscribe("Settings", Settings);
 
         }
@@ -121,7 +121,7 @@ namespace employeeAccountingWpf.ViewModels
             {
                 return _goToEmployees ?? (_goToEmployees = new RelayCommand(x =>
                 {
-                    Mediator.Notify("Employee", "");
+                    Mediator.Notify("EmployeeModel", "");
                     IsChecked = false;
                 }));
             }

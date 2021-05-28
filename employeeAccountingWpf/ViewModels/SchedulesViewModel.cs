@@ -14,8 +14,8 @@ namespace employeeAccountingWpf.ViewModels
 
         }
 
-        public Employee _employees { get; set; }
-        public ObservableCollection<Employee> Items1 { get; set; }
-        public ObservableCollection<WorkingDay> Items2 { get; set; }
+        public EmployeeModel _employees { get; set; }
+        public ObservableCollection<EmployeeModel> Items1 { get; set; }
+        public ObservableCollection<WorkingDayModel> Items2 { get; set; }
     }
 }

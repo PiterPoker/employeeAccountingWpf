@@ -24,11 +24,23 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <ListView ItemsSource="{Binding Items1}">
+        <ListView ItemsSource="{Binding Items1}" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Expander Header="{Binding LastName}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                        <DataGrid ItemsSource="{Binding Path=WorkingDays}" CanUserAddRows="True" />
+                    <Expander  ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" UseLayoutRounding="False">
+                        <HeaderedContentControl.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Margin="5" Text="{Binding LastName}"/>
+                                <TextBlock Margin="5" Text="{Binding FirstName}"/>
+                                <TextBlock Margin="5" Text="{Binding MiddleName}"/>
+                            </StackPanel>
+                        </HeaderedContentControl.Header>
+                        <DataGrid ItemsSource="{Binding Path=WorkingDays}" CanUserAddRows="True" AutoGenerateColumns="False" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Начало смены" Binding="{Binding StartDateTime}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Конец смены" Binding="{Binding EndDateTime}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Expander>
                 </DataTemplate>
             </ListView.ItemTemplate>

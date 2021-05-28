@@ -36,7 +36,7 @@
                     <TextBlock Grid.Row="0" Text="Новый работник" />
                     <TextBox Grid.Row="1" materialDesign:HintAssist.Hint="Фамилия" materialDesign:HintAssist.HelperText="Введите фамилию" Margin="15" HorizontalAlignment="Stretch" >
                         <TextBox.Text>
-                            <Binding Path="Employee.LastName" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="EmployeeModel.LastName" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
 
@@ -46,7 +46,7 @@
                     </TextBox>
                     <TextBox Grid.Row="2" materialDesign:HintAssist.Hint="Имя" materialDesign:HintAssist.HelperText="Введите имя" Margin="15" HorizontalAlignment="Stretch" >
                         <TextBox.Text>
-                            <Binding Path="Employee.FirstName" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="EmployeeModel.FirstName" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
 
@@ -56,7 +56,7 @@
                     </TextBox>
                     <TextBox Grid.Row="3" materialDesign:HintAssist.Hint="Отчество" materialDesign:HintAssist.HelperText="Введите отчество" Margin="15" HorizontalAlignment="Stretch" >
                         <TextBox.Text>
-                            <Binding Path="Employee.MiddleName" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="EmployeeModel.MiddleName" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
                                     
@@ -73,7 +73,7 @@
           IsDefault="True"
           Margin="0 8 8 0"
           Content="Сохранить" 
-          Command="{Binding AddCardCommand}" CommandParameter="{Binding Employee}">
+          Command="{Binding AddCardCommand}" CommandParameter="{Binding EmployeeModel}">
                     </Button>
                     <Button
           Style="{StaticResource MaterialDesignFlatButton}"
