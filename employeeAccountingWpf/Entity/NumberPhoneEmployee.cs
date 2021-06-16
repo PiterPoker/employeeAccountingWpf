@@ -1,6 +1,8 @@
+using employeeAccountingWpf.Interface;
+
 namespace employeeAccountingWpf.Entity
 {
-    public class NumberPhoneEmployee
+    public class NumberPhoneEmployee : INumberPhoneEmployee
     {
         public int Id { get; set; }
         public string NumberPhone { get; set; }

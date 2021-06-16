@@ -1,8 +1,9 @@
+using employeeAccountingWpf.Interface;
 using System.Collections.Generic;
 
 namespace employeeAccountingWpf.Entity
 {
-    public class OverTime   
+    public class OverTime : IOverTime
     {
         public int Id { get; set; }      
         public int? EmployeeId { get; set; }

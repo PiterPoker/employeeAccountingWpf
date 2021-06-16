@@ -1,8 +1,9 @@
+using employeeAccountingWpf.Interface;
 using System.Collections.Generic;
 
 namespace employeeAccountingWpf.Entity
 {
-    public class TypeOfAward
+    public class TypeOfAward : ITypeOfAward
     {
         public int Id { get; set; }
         public string NammeTypeOfAward { get; set; }

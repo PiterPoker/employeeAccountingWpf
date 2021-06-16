@@ -1,8 +1,9 @@
+using employeeAccountingWpf.Interface;
 using System.Collections.Generic;
 
 namespace employeeAccountingWpf.Entity
 {
-    public class Position   
+    public class Position : IPosition
     {
         public int Id { get; set; }
         public string NamePosition { get; set; }

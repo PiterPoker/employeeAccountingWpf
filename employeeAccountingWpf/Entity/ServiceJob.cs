@@ -1,8 +1,9 @@
+using employeeAccountingWpf.Interface;
 using System.Collections.Generic;
 
 namespace employeeAccountingWpf.Entity
 {
-    public class ServiceJob
+    public class ServiceJob : IServiceJob
     {
         public int Id { get; set; }
         public string NameService { get; set; }

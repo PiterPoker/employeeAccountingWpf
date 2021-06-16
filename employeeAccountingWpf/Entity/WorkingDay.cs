@@ -1,8 +1,9 @@
+using employeeAccountingWpf.Interface;
 using System;
 
 namespace employeeAccountingWpf.Entity
 {
-    public class WorkingDay
+    public class WorkingDay : IWorkingDay
     {
         public int Id { get; set; }
         public DateTime StartDateTime { get; set; }

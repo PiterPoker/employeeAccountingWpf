@@ -1,8 +1,9 @@
+using employeeAccountingWpf.Interface;
 using System.Collections.Generic;
 
 namespace employeeAccountingWpf.Entity
 {
-    public class Employee
+    public class Employee : IEmployee
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -12,14 +13,15 @@ namespace employeeAccountingWpf.Entity
         public Position Position { get; set; }
         public int? ServiceJobId { get; set; }
         public ServiceJob ServiceJob { get; set; }
-        public EmailEmployee EmailEmployee { get; set; }        
+        public EmailEmployee EmailEmployee { get; set; }      
         public int? StatusEmployeeId { get; set; }
         public StatusEmployee StatusEmployee { get; set; }
-        public StatusNumberPhoneEmployee StatusNumberPhoneEmployee { get; set; }
         public ICollection<OverTime> OverTimes { get; set; }
         public ICollection<WorkingDay> WorkingDays { get; set; }
+        public ICollection<EmailEmployee> EmailEmployees { get; set; }
         public Employee()
         {
+            EmailEmployees = new List<EmailEmployee>();
             WorkingDays = new List<WorkingDay>();
             OverTimes = new List<OverTime>();
         }

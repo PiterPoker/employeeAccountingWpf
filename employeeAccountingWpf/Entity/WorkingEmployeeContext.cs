@@ -5,8 +5,9 @@ namespace employeeAccountingWpf.Entity
     public class WorkingEmployeeContext : DbContext
     {
         public WorkingEmployeeContext():
-            base("WorkingEmployeeContext")
+            base("EmployeeDBConnection")
         { }
+
  
         public DbSet<EmailEmployee> EmailEmployees { get; set; }
         public DbSet<Employee> Employees { get; set; }
