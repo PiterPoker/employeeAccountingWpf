@@ -22,46 +22,7 @@
         <materialDesign:DialogHost IsOpen="{Binding IsOpenDialog}">
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
-                    <!--<TextBlock Text="{Binding TitleDialog}"/>
 
-                    <TextBox
-                                Margin="5"
-                                materialDesign:HintAssist.Hint="Название"
-                                HorizontalAlignment="Stretch" Text="{Binding Mark.Name, UpdateSourceTrigger=PropertyChanged}"/> 
-                    <TextBox Visibility="{Binding IsViseble}"
-                                Margin="5"
-                                materialDesign:HintAssist.Hint="Сокращение"
-                                HorizontalAlignment="Stretch"
-                        Text="{Binding Mark.MarkKey, UpdateSourceTrigger=PropertyChanged}"/> 
-                    <TextBox
-                                Margin="5"
-                                materialDesign:HintAssist.Hint="Рабочие часы"
-                                HorizontalAlignment="Stretch"
-                        
-                        Text="{Binding Mark.NumberOfHours, UpdateSourceTrigger=PropertyChanged}"/>
-
-                    <StackPanel
-                                Orientation="Horizontal"
-                                HorizontalAlignment="Right">
-                        <Button
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsDefault="True"
-                                    Margin="0 8 8 0"
-                                    Content="Сохранить"
-                                    Command="{Binding AddNewMarkCommand}" CommandParameter="{Binding Mark}">
-                        </Button>
-
-                        <Button
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsCancel="True"
-                                    Margin="0 8 8 0"
-                                    Content="Отменить"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                            <Button.CommandParameter>
-                                <system:Boolean>False</system:Boolean>
-                            </Button.CommandParameter>
-                        </Button>
-                    </StackPanel>-->
                 </StackPanel>
             </materialDesign:DialogHost.DialogContent>
             <Grid>
@@ -80,25 +41,29 @@
                     <TextBlock Text="Путь к базе данных" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,8,0"/>
                     <TextBox Text="htttp://localhost:3000/test" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
+
+                <!-- floating action button with progress -->
+                <!--#region Button connect to DataBase -->
                 <Button Grid.Row="0" Grid.Column="2"
   Style="{StaticResource MaterialDesignFloatingActionLightButton}"
   Margin="8 0 0 0"
-  Command="{Binding SaveCommand}" CommandParameter="{Binding IsCheck}"
-  materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsCheck}"
-  materialDesign:ButtonProgressAssist.Value="100">
+  Command="{Binding ConnectToDBCommand}"
+  materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsSaving1}"
+  materialDesign:ButtonProgressAssist.Value="{Binding SaveProgress1}">
                     <!-- simple example of toggling/animating pack icon with a data trigger-->
                     <materialDesign:PackIcon
     Height="24"
     Width="24">
                         <materialDesign:PackIcon.Style>
                             <Style
-        TargetType="materialDesign:PackIcon">
+        TargetType="materialDesign:PackIcon"
+        >
                                 <Setter
           Property="Kind"
           Value="CloudSync" />
                                 <Style.Triggers>
                                     <DataTrigger
-            Binding="{Binding}"
+            Binding="{Binding IsSaveComplete1}"
             Value="True">
                                         <Setter
               Property="Kind"
@@ -120,56 +85,23 @@
                         </materialDesign:PackIcon.Style>
                     </materialDesign:PackIcon>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="2"
-  Style="{StaticResource MaterialDesignFloatingActionLightButton}"
-  Margin="8 0 0 0"
-  Command="{Binding SaveCommand}" CommandParameter="{Binding IsCheck}"
-  materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsCheck}"
-  materialDesign:ButtonProgressAssist.Value="100">
-                    <!-- simple example of toggling/animating pack icon with a data trigger-->
-                    <materialDesign:PackIcon
-    Height="24"
-    Width="24">
-                        <materialDesign:PackIcon.Style>
-                            <Style
-        TargetType="materialDesign:PackIcon">
-                                <Setter
-          Property="Kind"
-          Value="CloudSync" />
-                                <Style.Triggers>
-                                    <DataTrigger
-            Binding="{Binding IsCheck}"
-            Value="True">
-                                        <Setter
-              Property="Kind"
-              Value="Check" />
-                                        <DataTrigger.EnterActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation
-                    Storyboard.TargetProperty="Opacity"
-                    From="0"
-                    To="1"
-                    Duration="0:0:0.8" />
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </DataTrigger.EnterActions>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </materialDesign:PackIcon.Style>
-                    </materialDesign:PackIcon>
-                </Button>
+                <!--#endregion-->
+                
+
+                
+               
                 <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                     <TextBlock Text="Соединение с сервером:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0"/>
                     <TextBox Text="htttp://localhost:3000/test" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
+
+                <!--#region Button Connect to Server -->
                 <Button Grid.Row="1" Grid.Column="2"
   Style="{StaticResource MaterialDesignFloatingActionLightButton}"
   Margin="8 0 0 0"
-  Command="{Binding ServerSaveCommand}" CommandParameter="{Binding IsCheckServer}"
-  materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsCheckServer}"
-  materialDesign:ButtonProgressAssist.Value="100">
+  Command="{Binding ConnectToServerCommand}"
+  materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsSaving}"
+  materialDesign:ButtonProgressAssist.Value="{Binding SaveProgress}">
                     <!-- simple example of toggling/animating pack icon with a data trigger-->
                     <materialDesign:PackIcon
     Height="24"
@@ -182,7 +114,7 @@
           Value="CloudSync" />
                                 <Style.Triggers>
                                     <DataTrigger
-            Binding="{Binding}"
+            Binding="{Binding IsSaveComplete}"
             Value="True">
                                         <Setter
               Property="Kind"
@@ -204,53 +136,16 @@
                         </materialDesign:PackIcon.Style>
                     </materialDesign:PackIcon>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="2"
-  Style="{StaticResource MaterialDesignFloatingActionLightButton}"
-  Margin="8 0 0 0"
-  Command="{Binding ServerSaveCommand}" CommandParameter="{Binding IsCheckServer}"
-  materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsCheckServer}"
-  materialDesign:ButtonProgressAssist.Value="100">
-                    <!-- simple example of toggling/animating pack icon with a data trigger-->
-                    <materialDesign:PackIcon
-    Height="24"
-    Width="24">
-                        <materialDesign:PackIcon.Style>
-                            <Style
-        TargetType="materialDesign:PackIcon">
-                                <Setter
-          Property="Kind"
-          Value="CloudSync" />
-                                <Style.Triggers>
-                                    <DataTrigger
-            Binding="{Binding IsCheckServer}"
-            Value="True">
-                                        <Setter
-              Property="Kind"
-              Value="Check" />
-                                        <DataTrigger.EnterActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation
-                    Storyboard.TargetProperty="Opacity"
-                    From="0"
-                    To="1"
-                    Duration="0:0:0.8" />
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </DataTrigger.EnterActions>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </materialDesign:PackIcon.Style>
-                    </materialDesign:PackIcon>
-                </Button>
+                <!--#endregion-->
+
                 <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
                     <TextBlock Text="Статусы рабочего дня:"/>
-                    <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Path=Marks}" SelectedItem="{Binding SelectMark}" Margin="5">
+                    <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Path=StatusWorkingDays}" SelectedItem="{Binding SelectStatusWorkingDayModel}" Margin="5" HorizontalContentAlignment="Stretch">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=MarkKey, UpdateSourceTrigger=PropertyChanged}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameStatusWorkingDay, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Abbreviation, UpdateSourceTrigger=PropertyChanged}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=StartWorkingDay, StringFormat={}{0:HH:mm}, UpdateSourceTrigger=PropertyChanged}"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=NumberOfHours, UpdateSourceTrigger=PropertyChanged}"/>
                             </GridView>
                         </ListView.View>
@@ -258,23 +153,23 @@
 
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Content="Добавть" Command="{Binding OpenStatusDayCardCommand}" Width="100" Foreground="AliceBlue" Margin="5"/>
-                        <Button Content="Удалить" Width="100" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectMark}" Foreground="White" Margin="5"/>
+                        <Button Content="Удалить" Width="100" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectStatusWorkingDayModel}" Foreground="White" Margin="5"/>
                         <!--<Button Content="Изменить" Command="{Binding EditMarkCommand}" CommandParameter="{Binding SelectMark}" Width="100" Foreground="White" Margin="5"/>-->
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Vertical">
                     <TextBlock Text="Статусы сотрудника:"/>
-                    <ListView Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Path=StatusEmployeeModels}" SelectedItem="{Binding SelectStatusEmployeeModel}" Margin="5">
+                    <ListView Grid.Row="3" Grid.Column="1" ItemsSource="{Binding StatusEmployees}" SelectedItem="{Binding SelectStatusEmployeeModel}" Margin="5">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameStatusEmployee, UpdateSourceTrigger=PropertyChanged}"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=AbbreviationStatusEmployee, UpdateSourceTrigger=PropertyChanged}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding NameStatusEmployee, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Abbreviation, UpdateSourceTrigger=PropertyChanged}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
 
                     <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="Добавть" Command="{Binding OpenStatusEmployeeCardCommand}" CommandParameter="{Binding SelectStatusEmployeeModel}" Width="100"  Foreground="AliceBlue" Margin="5"/>
+                        <Button Content="Добавть" Command="{Binding OpenStatusEmployeeCardCommand}" Width="100"  Foreground="AliceBlue" Margin="5"/>
                         <Button Content="Удалить" Width="100" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectStatusEmployeeModel}" Foreground="White" Margin="5"/>
                         <!--<Button Content="Изменить" Command="{Binding OpenStatusEmployeeCardCommand}"  CommandParameter="{Binding SelectStatusEmployeeModel}" Width="100" Foreground="White" Margin="5"/>-->
                     </StackPanel>

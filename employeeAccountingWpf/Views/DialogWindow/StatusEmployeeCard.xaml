@@ -6,6 +6,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:employeeAccountingWpf.Views.DialogWindow" 
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:viewmodels="clr-namespace:employeeAccountingWpf.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:SettingsViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -18,7 +20,7 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Margin="16">
-            <TextBlock Text="Карточка статуса сотрудника: "/>
+            <TextBlock Text="Карточка должность сотрудника: "/>
 
             <TextBox
                                 Margin="5"
@@ -27,7 +29,7 @@
             <TextBox                                 Margin="5"
                                 materialDesign:HintAssist.Hint="Сокращение"
                                 HorizontalAlignment="Stretch"
-                        Text="{Binding StatusEmployeeModel.AbbreviationStatusEmployee, UpdateSourceTrigger=PropertyChanged}"/>
+                        Text="{Binding StatusEmployeeModel.Abbreviation, UpdateSourceTrigger=PropertyChanged}"/>
 
             <StackPanel
                                 Orientation="Horizontal"
@@ -37,8 +39,7 @@
                                     IsDefault="True"
                                     Margin="0 8 8 0"
                                     Content="Сохранить"
-                                    Command="{Binding SaveCardCommand}" CommandParameter="{Binding StatusEmployeeModel}">
-                </Button>
+                                    Command="{Binding SaveCardCommand}" CommandParameter="{Binding StatusEmployeeModel}"/>
 
                 <Button
                                     Style="{StaticResource MaterialDesignFlatButton}"
