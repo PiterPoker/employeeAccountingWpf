@@ -13,8 +13,24 @@ namespace employeeAccountingWpf.Entity
         public int NumberOfHours { get; set; }
         public DateTime StartWorkingDay { get; set; }
         public ICollection<WorkingDay> WorkingDays { get; set; }
-        public StatusWorkingDay()
+        public StatusWorkingDay():this("")
+        {            
+        }
+        public StatusWorkingDay(string nameStatusWorkingDay) : this(nameStatusWorkingDay, "")
         {
+        }
+        public StatusWorkingDay(string nameStatusWorkingDay, string abbreviation) : this(nameStatusWorkingDay, abbreviation, 0)
+        {
+        }
+        public StatusWorkingDay(string nameStatusWorkingDay, string abbreviation, int numberOfHours) : this(nameStatusWorkingDay, abbreviation, numberOfHours, DateTime.Now)
+        {
+        }
+        public StatusWorkingDay(string nameStatusWorkingDay, string abbreviation, int numberOfHours, DateTime startWorkingDay)
+        {
+            NameStatusWorkingDay = nameStatusWorkingDay;
+            Abbreviation = abbreviation;
+            NumberOfHours = numberOfHours;
+            StartWorkingDay = startWorkingDay;
             WorkingDays = new List<WorkingDay>();
         }
     }

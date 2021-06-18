@@ -13,5 +13,16 @@ namespace employeeAccountingWpf.Entity
         {
             Employees = new List<Employee>();
         }
+
+        public StatusEmployee(string nameStatusEmployee) : this(nameStatusEmployee, "")
+        {
+        }
+
+        public StatusEmployee(string nameStatusEmployee, string abbreviation)
+        {
+            NameStatusEmployee = nameStatusEmployee;
+            Abbreviation = abbreviation;
+            Employees = new List<Employee>();
+        }
     }
 }
